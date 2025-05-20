@@ -1,6 +1,6 @@
 @extends('layout.app')
 @push('styles')
-    <link rel="stylesheet" href="/dist/css/login/login.css">
+    <link rel="stylesheet" href="/dist/css/login.css">
 @endpush
 @section('content')
     <div class="login-container">
@@ -8,7 +8,7 @@
             <h1>Welcome Back</h1>
             <p>Please enter your credentials to login</p>
         </div>
-
+        
         <form class="login-form">
             <div class="form-group">
                 <label for="email">Email or Username</label>
@@ -30,7 +30,7 @@
 
             <div class="login-links">
                 <a href="#">Forgot Password?</a>
-                <a href="#">Create Account</a>
+                <a href="{{route("register")}}">Create Account</a>
             </div>
 
             <div class="divider">OR</div>
