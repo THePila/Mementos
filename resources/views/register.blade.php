@@ -5,7 +5,7 @@
 <!-- Header -->
 <header class="header">
     <div class="logo">Memen<span>tos</span></div>
-    <p>Join our community and connect with friends, share moments, and discover new opportunities.</p>
+    <p>Take your Heart.</p>
 </header>
 <!-- revisar en el css los estilos de errorMessage-->
 <!-- Registration Container -->

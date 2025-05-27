@@ -7,35 +7,17 @@
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    body {
-        background-color: #0a0a0a;
-        color: #f5f5f5;
-        min-height: 100vh;
-        padding: 30px;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    h1 {
-        font-size: 28px;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-
-    h2 {
-        font-size: 20px;
-        margin: 30px 0 15px;
-        color: #cccccc;
-    }
-
     /* Custom Bootstrap-inspired Alerts */
     .alert {
-        position: relative;
+        position: fixed;
+        top: 15px;
+        left: 15;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 500px;
+        z-index: 9999;
         padding: 16px;
-        margin-bottom: 20px;
+        margin-bottom: 0;
         border: 1px solid transparent;
         border-radius: 8px;
         display: flex;
@@ -53,12 +35,6 @@
         border-left-width: 4px;
     }
 
-    .alert-warning {
-        color: #ffffff;
-        background-color: #2a2215;
-        border-color: #e69900;
-        border-left-width: 4px;
-    }
 
     .alert-success {
         color: #ffffff;
@@ -67,12 +43,6 @@
         border-left-width: 4px;
     }
 
-    .alert-info {
-        color: #ffffff;
-        background-color: #15222a;
-        border-color: #0099e6;
-        border-left-width: 4px;
-    }
 
     /* Alert icons */
     .alert-icon {
@@ -92,20 +62,11 @@
         color: #ffffff;
     }
 
-    .alert-warning .alert-icon {
-        background-color: #e69900;
-        color: #ffffff;
-    }
-
     .alert-success .alert-icon {
         background-color: #00cc66;
         color: #ffffff;
     }
 
-    .alert-info .alert-icon {
-        background-color: #0099e6;
-        color: #ffffff;
-    }
 
     /* Alert content */
     .alert-content {
@@ -122,49 +83,17 @@
         color: #ff3333;
     }
 
-    .alert-warning .alert-heading {
-        color: #ffcc00;
-    }
-
     .alert-success .alert-heading {
         color: #33ff99;
     }
 
-    .alert-info .alert-heading {
-        color: #33ccff;
-    }
+
 
     .alert-text {
         font-size: 14px;
         line-height: 1.5;
     }
 
-    /* Alert links */
-    .alert a {
-        font-weight: 600;
-        text-decoration: underline;
-        transition: opacity 0.3s ease;
-    }
-
-    .alert a:hover {
-        opacity: 0.8;
-    }
-
-    .alert-danger a {
-        color: #ff6666;
-    }
-
-    .alert-warning a {
-        color: #ffcc33;
-    }
-
-    .alert-success a {
-        color: #66ffaa;
-    }
-
-    .alert-info a {
-        color: #66d9ff;
-    }
 
     /* Dismissible alerts */
     .alert-dismissible {
@@ -240,62 +169,6 @@
         animation: fadeOut 0.3s ease forwards;
     }
 
-    /* Form styles (for demo) */
-    .form-container {
-        background-color: #1a1a1a;
-        border-radius: 10px;
-        padding: 30px;
-        margin-top: 40px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        color: #cccccc;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 12px 15px;
-        background-color: #2a2a2a;
-        border: 1px solid #3a3a3a;
-        border-radius: 5px;
-        color: #ffffff;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .form-group input:focus {
-        outline: none;
-        border-color: #e60000;
-        box-shadow: 0 0 0 2px rgba(230, 0, 0, 0.2);
-    }
-
-    .btn {
-        padding: 12px 20px;
-        border-radius: 5px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-    }
-
-    .btn-primary {
-        background-color: #e60000;
-        color: white;
-    }
-
-    .btn-primary:hover {
-        background-color: #cc0000;
-    }
-
     /* Responsive styles */
     @media (max-width: 768px) {
         body {
@@ -337,13 +210,20 @@
         }
     }
 </style>
-<div class="alert alert-{{ $type }}">
-    <div class="alert-icon"></div>
+<!-- Dismissible Error Alert -->
+<div class="alert alert-{{ $type }} alert-dismissible" id="dismissibleError">
+    <div class="alert-icon">
+        @if ($type == 'danger')
+            !
+        @elseif($type == 'success')
+            ✓
+        @endif
+    </div>
     <div class="alert-content">
         <div class="alert-text">
-            @if(is_array($messages))
+            @if (is_array($messages))
                 <ul class="alert-list">
-                    @foreach($messages as $message)
+                    @foreach ($messages as $message)
                         <li>{{ $message }}</li>
                     @endforeach
                 </ul>
@@ -352,34 +232,37 @@
             @endif
         </div>
     </div>
+    <button type="button" class="close" onclick="dismissAlert('dismissibleError')" aria-label="Close">✕</button>
 </div>
-{{-- <script>
-        // Dismiss alert function
-        function dismissAlert(alertId) {
-            const alert = document.getElementById(alertId);
-            alert.classList.add('fade-out');
-            
-            // Remove the alert after animation completes
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 300);
-        }
+</div>
 
-        // Form validation with alert
-        function validateForm() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const formAlert = document.getElementById('formAlert');
-            
-            // Reset alert
-            formAlert.style.display = 'none';
-            formAlert.className = 'alert';
-            
-            // Validate form
-            if (!email || !password) {
-                // Show error alert
-                formAlert.className = 'alert alert-danger';
-                formAlert.innerHTML = `
+<script>
+    // Dismiss alert function
+    function dismissAlert(alertId) {
+        const alert = document.getElementById(alertId);
+        alert.classList.add('fade-out');
+
+        // Remove the alert after animation completes
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 300);
+    }
+
+    // Form validation with alert
+    function validateForm() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const formAlert = document.getElementById('formAlert');
+
+        // Reset alert
+        formAlert.style.display = 'none';
+        formAlert.className = 'alert';
+
+        // Validate form
+        if (!email || !password) {
+            // Show error alert
+            formAlert.className = 'alert alert-danger';
+            formAlert.innerHTML = `
                     <div class="alert-icon">!</div>
                     <div class="alert-content">
                         <div class="alert-heading">Form Validation Error</div>
@@ -393,11 +276,11 @@
                         </ul>
                     </div>
                 `;
-                formAlert.style.display = 'flex';
-            } else if (password.length < 8) {
-                // Show warning alert
-                formAlert.className = 'alert alert-warning';
-                formAlert.innerHTML = `
+            formAlert.style.display = 'flex';
+        } else if (password.length < 8) {
+            // Show warning alert
+            formAlert.className = 'alert alert-warning';
+            formAlert.innerHTML = `
                     <div class="alert-icon">⚠</div>
                     <div class="alert-content">
                         <div class="alert-heading">Password Too Short</div>
@@ -406,11 +289,11 @@
                         </div>
                     </div>
                 `;
-                formAlert.style.display = 'flex';
-            } else {
-                // Show success alert
-                formAlert.className = 'alert alert-success';
-                formAlert.innerHTML = `
+            formAlert.style.display = 'flex';
+        } else {
+            // Show success alert
+            formAlert.className = 'alert alert-success';
+            formAlert.innerHTML = `
                     <div class="alert-icon">✓</div>
                     <div class="alert-content">
                         <div class="alert-heading">Registration Successful!</div>
@@ -419,10 +302,10 @@
                         </div>
                     </div>
                 `;
-                formAlert.style.display = 'flex';
-                
-                // Reset form
-                document.getElementById('demoForm').reset();
-            }
+            formAlert.style.display = 'flex';
+
+            // Reset form
+            document.getElementById('demoForm').reset();
         }
-    </script> --}}
+    }
+</script>
