@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Register;
+use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
@@ -16,7 +17,7 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request) 
     {
         // dd($request->all());
-        Register::create([
+        User::create([
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,

@@ -9,20 +9,21 @@
             <p>Please enter your credentials to login</p>
         </div>
         
-        <form class="login-form">
+        <form class="login-form" action="{{route('login.authenticate')}}" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="email">Email or Username</label>
-                <input type="text" id="email" placeholder="Enter your email or username" required>
+                <input type="text" id="email" name= "email" placeholder="Enter your email or username" required>
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter your password" required>
+                <input type="password" id="password" placeholder="Enter your password" name="password" required>
                 <span class="password-toggle" onclick="togglePassword()">Show</span>
             </div>
 
             <div class="form-checkbox">
-                <input type="checkbox" id="remember">
+                <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember me</label>
             </div>
 
