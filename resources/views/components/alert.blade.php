@@ -1,4 +1,6 @@
-<style>
+
+
+{{-- <style>
     /* Reset and base styles */
     * {
         margin: 0;
@@ -209,7 +211,7 @@
             padding: 20px;
         }
     }
-</style>
+</style> --}}
 <!-- Dismissible Error Alert -->
 <div class="alert alert-{{ $type }} alert-dismissible" id="dismissibleError">
     <div class="alert-icon">

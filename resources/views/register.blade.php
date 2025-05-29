@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @push('styles')
     <link rel="stylesheet" href="/dist/css/register.css">
 @endpush
@@ -47,7 +47,7 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Create a strong password" 
-                    onkeyup="checkPasswordStrength()">
+                   required onkeyup="checkPasswordStrength()">
                 <span class="password-toggle" onclick="togglePassword('password', this)">Show</span>
                 <div class="password-strength">
                     <div class="strength-meter" id="strengthMeter"></div>
@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" name='confirmPassword'>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" name='confirmPassword' required>
                 <span class="password-toggle" onclick="togglePassword('confirmPassword', this)">Show</span>
             </div>
         </div>
