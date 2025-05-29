@@ -2,7 +2,6 @@
 @push('styles')
     <link rel="stylesheet" href="/dist/css/home.css">
 @endpush
-
 @section('content')
     <!-- Header -->
     <header class="header">
@@ -104,7 +103,7 @@
                     <span class="nav-item-icon">⚙️</span>
                     <span>Settings</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{route('logout')}}" class="nav-item">
                     <span class="nav-item-icon">🚪</span>
                     <span>Logout</span>
                 </a>

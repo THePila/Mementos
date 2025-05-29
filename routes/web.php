@@ -14,12 +14,12 @@ Route::view('/login', 'login')->name('login');
 Route::controller(RegisterController::class)->group(callback: function () {
     Route::get('/register', 'index')->name('register');
     Route::post('/register/store', action: 'store')->name('register.store');
-    // Route::get('/register/verify/{token}', 'verify')->name('verify');
 });
 
 Route::controller(LoginController::class)->group(callback: function () {
     Route::post('/login/authenticate', 'authenticate')->name('login.authenticate');
     Route::get('/logout', 'logout')->name('logout');
+
 });
 
 Route::get('/home', function () {

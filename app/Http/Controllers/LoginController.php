@@ -29,4 +29,13 @@ class LoginController extends Controller
             'password' => 'La contraseña es incorrecta.',
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+    }
 }
