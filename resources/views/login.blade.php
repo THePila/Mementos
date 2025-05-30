@@ -30,7 +30,7 @@
             <button type="submit" class="login-button">Login</button>
 
             <div class="login-links">
-                <a href="#">Forgot Password?</a>
+                <a href="{{route("forgot.password.view")}}">Forgot Password?</a>
                 <a href="{{route("register")}}">Create Account</a>
             </div>
 
